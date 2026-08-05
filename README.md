@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Landing page Da 0 a Digital — Copyosity
 
-## Getting Started
+Next.js landing for the **Da 0 a Digital** service. Goal: collect application form submissions.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
+cp .env.example .env.local
+# add your RESEND_API_KEY to .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Without `RESEND_API_KEY`, the form UI works but submissions return a clear configuration error.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy on Vercel (test domain)
 
-## Learn More
+1. Push this `landing` folder (or the repo) to GitHub.
+2. Import the project in [Vercel](https://vercel.com) — root directory: `landing` if the repo is the parent folder.
+3. Add environment variables:
+   - `RESEND_API_KEY`
+   - `CONTACT_TO_EMAIL=copyosity@gmail.com`
+   - `CONTACT_FROM_EMAIL=Copyosity <onboarding@resend.dev>` (or your verified domain sender)
+4. Deploy. Use the `*.vercel.app` URL for testing.
+5. Later: point a custom path/subdomain and redirect from the Wix page.
 
-To learn more about Next.js, take a look at the following resources:
+## Brand assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Colors: green dark `#245C47`, green light `#CEC053`, blue `#3D8BC9`, orange `#DB7234`, pink `#E1C6DC`
+- Fonts: Varela Round (headings), Nunito Sans (body)
+- Logo: `public/images/logo.png`
