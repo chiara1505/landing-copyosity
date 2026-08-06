@@ -48,6 +48,10 @@ export function Pricing() {
                 Sono esclusi dominio, hosting e materiali fotografici
                 professionali.
               </p>
+              <p className="mt-2 text-sm text-ink-muted">
+                Pagamento del 30% all’avvio dei lavori e saldo alla consegna.
+                Se ti è più comodo, possiamo valutare una rateizzazione.
+              </p>
             </Reveal>
           </div>
 

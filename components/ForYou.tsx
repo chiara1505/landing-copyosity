@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { forYouIf } from "@/lib/content";
+import { Reveal } from "./Reveal";
 import { TypewriterTitle } from "./TypewriterTitle";
 
 const pairs = Array.from({ length: Math.ceil(forYouIf.length / 2) }, (_, i) =>
@@ -58,55 +59,39 @@ export function ForYou() {
     const node = listRef.current;
     if (!node) return;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const isMobile = window.matchMedia("(max-width: 639px)").matches;
-
-    if (prefersReduced || isMobile) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisible(true);
-      return;
-    }
-
-    const show = () => setVisible(true);
-
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
-      show();
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          show();
+          setVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.01, rootMargin: "40px 0px" },
+      { threshold: 0.2, rootMargin: "0px 0px -12% 0px" },
     );
 
     observer.observe(node);
-    const fallback = window.setTimeout(show, 800);
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(fallback);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section className="bg-pink py-20 text-ink sm:px-8 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="px-5 sm:px-0">
-          <TypewriterTitle
-            as="h2"
-            text="Questo percorso fa per te se"
-            className="text-center font-display text-3xl text-ink sm:text-5xl"
-          />
+          <Reveal>
+            <TypewriterTitle
+              as="h2"
+              text="Questo percorso fa per te se"
+              className="text-center font-display text-3xl text-ink sm:text-5xl"
+            />
+          </Reveal>
         </div>
 
-        {/* Mobile: native swipe pairs */}
-        <div className="relative mt-10 sm:hidden">
+        <Reveal className="relative mt-10 sm:hidden">
           <p className="mb-4 flex items-center justify-center gap-2 px-5 text-sm text-ink-muted">
             <span aria-hidden>←</span>
             Scorri con il dito
@@ -139,9 +124,8 @@ export function ForYou() {
             aria-hidden
             className="pointer-events-none absolute inset-y-10 right-0 w-10 bg-gradient-to-l from-pink to-transparent"
           />
-        </div>
+        </Reveal>
 
-        {/* Tablet / desktop: grid */}
         <ul
           ref={listRef}
           className="mt-12 hidden gap-4 px-5 sm:grid sm:grid-cols-2 sm:px-0"

@@ -44,7 +44,7 @@ export function HowItWorks() {
                   </div>
 
                   <div
-                    className={`flex h-full flex-col justify-center rounded-2xl px-5 py-6 sm:px-8 sm:py-10 ${
+                    className={`flex h-full flex-col justify-center rounded-2xl px-7 py-8 sm:px-8 sm:py-10 ${
                       isLight ? "bg-green-light" : "bg-green-dark"
                     } ${squareLeft ? "order-2" : "order-2 md:order-1"}`}
                   >

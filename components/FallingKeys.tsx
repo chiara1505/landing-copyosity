@@ -38,6 +38,10 @@ export function FallingKeys() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
+    // Skip on mobile — keys aren't readable on small screens
+    const desktopOrTablet = window.matchMedia("(min-width: 768px)");
+    if (!desktopOrTablet.matches) return;
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setActive(true);
       return;
@@ -66,7 +70,7 @@ export function FallingKeys() {
   return (
     <div
       ref={layerRef}
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 hidden overflow-hidden md:block"
       aria-hidden="true"
     >
       {KEYS.map((key) => (

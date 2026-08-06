@@ -139,7 +139,7 @@ export function ApplicationForm() {
                     setForm((prev) => ({ ...prev, email: e.target.value }))
                   }
                   className={fieldClassName}
-                  placeholder="la.tua@email.it"
+                  placeholder="la.tua.email@gmail.com"
                 />
               </Field>
 

@@ -31,6 +31,10 @@
 }
 
 html {
+  scroll-behavior: auto;
+}
+
+html.is-smooth-ready {
   scroll-behavior: smooth;
 }
 
@@ -90,7 +94,7 @@ h4,
   transform: translateY(0);
 }
 
-/* Mobile: content always readable — no hide-until-scroll */
+/* Mobile safety: never hide content behind failed scroll animations */
 @media (max-width: 639px) {
   .reveal,
   .animate-fade-up {

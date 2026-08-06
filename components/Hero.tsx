@@ -12,11 +12,11 @@ export function Hero() {
             className="animate-fade-up text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted sm:text-sm"
             style={{ animationDelay: "40ms" }}
           >
-            Sito + Copy
+            Sito + Testi
           </p>
           <TypewriterTitle
             as="h1"
-            text="Costruisci la tua presenza digitale in 12 settimane"
+            text="Il tuo sito professionale in 12 settimane"
             startOnMount
             className="mt-4 font-display text-3xl leading-tight text-ink sm:mt-3 sm:text-5xl lg:text-[3.15rem] lg:leading-[1.12]"
           />
@@ -25,22 +25,22 @@ export function Hero() {
             style={{ animationDelay: "120ms" }}
           >
             Sei una libera professione o una piccola attività e vuoi finalmente
-            avere un sito professionale, senza improvvisare e complicarti la
-            vita?
+            avere un sito professionale, senza improvvisare o riempire un
+            template a caso?
           </p>
           <p
-            className="mt-6 hidden animate-fade-up text-lg leading-relaxed text-ink-muted sm:block"
+            className="mt-6 animate-fade-up text-lg leading-relaxed text-ink-muted"
             style={{ animationDelay: "200ms" }}
           >
-            Porta online un sito che racconti chi sei, faccia capire il valore
-            del tuo lavoro e ti aiuti a raggiungere le persone giuste.
+            Porta online un sito che racconti chi sei, renda chiaro il valore di
+            ciò che fai e ti faccia scegliere dalle persone giuste.
           </p>
           <p
             className="mt-5 animate-fade-up text-lg leading-relaxed text-ink-muted"
             style={{ animationDelay: "260ms" }}
           >
-            Trasformiamo insieme le tue idee in un sito coerente e davvero tuo
-            partendo dalla cosa più importante: le parole.
+            Trasformiamo insieme le tue idee in un sito che funziona e che è
+            davvero tuo partendo dalla cosa più importante: le parole.
           </p>
           <div
             className="mt-10 animate-fade-up sm:mt-8"

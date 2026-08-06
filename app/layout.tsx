@@ -40,6 +40,26 @@ export default function RootLayout({
       lang="it"
       className={`${varelaRound.variable} ${nunitoSans.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function () {
+  try {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    var isReload = nav && nav.type === "reload";
+    if (!isReload && performance.navigation) isReload = performance.navigation.type === 1;
+    // Only on full reload: start from the top (ignore leftover hash position)
+    if (isReload) {
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+      window.scrollTo(0, 0);
+    }
+  } catch (e) {}
+})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans text-ink">
         {children}
       </body>

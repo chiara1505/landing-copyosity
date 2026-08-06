@@ -18,24 +18,12 @@ export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-
-    const show = () => {
-      node.classList.add("is-visible");
-    };
-
-    if (prefersReduced) {
-      show();
-      return;
-    }
-
     const isMobile = window.matchMedia("(max-width: 639px)").matches;
-    if (isMobile) {
-      show();
-      return;
-    }
 
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+    const show = () => node.classList.add("is-visible");
+
+    // Mobile: always show content (IO was hiding whole sections)
+    if (prefersReduced || isMobile) {
       show();
       return;
     }
@@ -47,17 +35,14 @@ export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
           observer.disconnect();
         }
       },
-      { threshold: 0.05, rootMargin: "0px 0px -5% 0px" },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -12% 0px",
+      },
     );
 
     observer.observe(node);
-
-    const fallback = window.setTimeout(show, 1800);
-
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(fallback);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (

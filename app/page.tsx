@@ -6,14 +6,18 @@ import { FallingKeys } from "@/components/FallingKeys";
 import { Outcomes } from "@/components/Outcomes";
 import { ForYou } from "@/components/ForYou";
 import { HowItWorks } from "@/components/HowItWorks";
+import { AboutMe } from "@/components/AboutMe";
 import { Pricing } from "@/components/Pricing";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
+import { BackToTop } from "@/components/BackToTop";
+import { ScrollReset } from "@/components/ScrollReset";
 
 export default function Home() {
   return (
     <>
+      <ScrollReset />
       <Header />
       <main>
         <Hero />
@@ -27,11 +31,13 @@ export default function Home() {
         <Outcomes />
         <HowItWorks />
         <ForYou />
+        <AboutMe />
         <Pricing />
         <ApplicationForm />
         <Faq />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }
