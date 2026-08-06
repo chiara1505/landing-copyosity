@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { outcomes } from "@/lib/content";
+import { outcomes, type Outcome } from "@/lib/content";
 import { TypewriterTitle } from "./TypewriterTitle";
-
-type Outcome = (typeof outcomes)[number];
 
 const pairs = Array.from({ length: Math.ceil(outcomes.length / 2) }, (_, i) =>
   outcomes.slice(i * 2, i * 2 + 2),

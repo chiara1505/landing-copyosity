@@ -41,7 +41,17 @@ export const pillars = [
   },
 ] as const;
 
-export const outcomes = [
+export type OutcomePart = {
+  text: string;
+  bold?: boolean;
+};
+
+export type Outcome = {
+  id: string;
+  parts: OutcomePart[];
+};
+
+export const outcomes: Outcome[] = [
   {
     id: "strategia",
     parts: [
@@ -99,7 +109,7 @@ export const outcomes = [
       { text: "autonomia", bold: true },
     ],
   },
-] as const;
+];
 
 export const forYouIf = [
   "Hai rimandato il sito per mesi perché non sapevi da dove partire o avevi paura di buttare soldi",
