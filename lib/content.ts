@@ -56,8 +56,8 @@ export const outcomes: Outcome[] = [
     id: "strategia",
     parts: [
       { text: "Una " },
-      { text: "strategia definita", bold: true },
-      { text: ", un’identità unica e contenuti pronti per raccontarti" },
+      { text: "strategia chiara", bold: true },
+      { text: ", un’identità riconoscibile e contenuti pronti per raccontarti" },
     ],
   },
   {
@@ -117,7 +117,7 @@ export const forYouIf = [
   "Vuoi un sito professionale, senza scegliere template a caso e scrivere testi da sola/o",
   "Sai cosa fai bene, ma fatichi a spiegarlo online in modo chiaro e convincente",
   "Vuoi sfruttare ogni opportunità del web per farti trovare dalle persone giuste",
-  "Preferisci un percorso guidato in poche settimane da un’unica professionista",
+  "Vuoi avere una sola professionista di riferimento per strategia, testi e realizzazione del sito",
 ] as const;
 
 export const phases = [
@@ -132,7 +132,7 @@ export const phases = [
   },
   {
     step: "2",
-    title: "Contenuti",
+    title: "Costruzione",
     items: [
       "Progettiamo e realizziamo il sito web, dalla struttura alla pubblicazione.",
       "Scriviamo i testi delle pagine principali, pensati per raccontare il tuo progetto e ottimizzati per il web.",
@@ -154,10 +154,10 @@ export const inclusions = [
   "Definizione del posizionamento e della comunicazione",
   "Struttura strategica e realizzazione di un sito web di 5 pagine",
   "Creazione del sito personalizzato",
-  "Testi delle pagine principali ottimizzati SEO per il web e le AI",
+  "Testi ottimizzati SEO per i motori di ricerca e le AI",
   "3 articoli di blog strategici per iniziare a costruire autorevolezza online",
-  "Una revisione completa del progetto prima della consegna",
-  "Assistenza per gestire il sito in autonomia",
+  "Una revisione finale prima della pubblicazione",
+  "Una guida pratica per gestire il sito in autonomia",
 ] as const;
 
 export const faqs = [

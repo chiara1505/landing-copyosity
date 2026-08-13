@@ -12,7 +12,7 @@ export function Hero() {
             className="animate-fade-up text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted sm:text-sm"
             style={{ animationDelay: "40ms" }}
           >
-            Sito + Testi
+            Strategia + Sito
           </p>
           <TypewriterTitle
             as="h1"
