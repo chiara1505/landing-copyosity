@@ -11,6 +11,7 @@ type ContactPayload = {
   status?: string;
   project?: string;
   company?: string;
+  privacy?: boolean;
 };
 
 function isValidEmail(email: string) {
@@ -42,10 +43,21 @@ export async function POST(request: Request) {
   const month = body.month?.trim() ?? "";
   const status = body.status?.trim() ?? "";
   const project = body.project?.trim() ?? "";
+  const privacy = Boolean(body.privacy);
 
   if (!name || !email || !month || !status || !project) {
     return NextResponse.json(
       { error: "Compila tutti i campi obbligatori." },
+      { status: 400 },
+    );
+  }
+
+  if (!privacy) {
+    return NextResponse.json(
+      {
+        error:
+          "Per inviare la candidatura devi accettare la Privacy Policy e la Cookie Policy.",
+      },
       { status: 400 },
     );
   }
