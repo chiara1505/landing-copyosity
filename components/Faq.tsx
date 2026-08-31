@@ -9,7 +9,7 @@ export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-surface px-5 py-20 sm:px-8 sm:py-28">
+    <section id="faq" className="bg-surface px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-3xl">
         <Reveal>
           <TypewriterTitle

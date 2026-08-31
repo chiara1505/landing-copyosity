@@ -1,3 +1,5 @@
+import { faqs } from "@/lib/content";
+
 const siteUrl = "https://sito-professionale.copyosity.it";
 
 export const jsonLd = {
@@ -37,6 +39,7 @@ export const jsonLd = {
         "Strategia, testi SEO e sito web in 12 settimane, senza improvvisare. Per libere professioni e piccole attività. Basta rimandare! Raccontami il tuo progetto.",
       isPartOf: { "@id": `${siteUrl}/#website` },
       about: { "@id": `${siteUrl}/#service` },
+      mainEntity: { "@id": `${siteUrl}/#faq` },
       inLanguage: "it-IT",
     },
     {
@@ -65,6 +68,19 @@ export const jsonLd = {
         description:
           "Prezzo promozionale fino a dicembre 2026. Prezzo pieno €2.049.",
       },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      url: `${siteUrl}/#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.a,
+        },
+      })),
     },
   ],
 };
