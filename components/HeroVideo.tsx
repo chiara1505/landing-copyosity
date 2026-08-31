@@ -18,6 +18,9 @@ export function HeroVideo() {
   const [duration, setDuration] = useState(0);
   const [hovering, setHovering] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [cssFullscreen, setCssFullscreen] = useState(false);
+
+  const expanded = isFullscreen || cssFullscreen;
 
   const play = useCallback(() => {
     const video = videoRef.current;
@@ -39,9 +42,32 @@ export function HeroVideo() {
     else play();
   }, [pause, play, playing]);
 
+  const isMobileLike = useCallback(() => {
+    if (typeof window === "undefined") return false;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const narrow = window.matchMedia("(max-width: 1023px)").matches;
+    const ios =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    return coarse || narrow || ios;
+  }, []);
+
   const toggleFullscreen = useCallback(async () => {
+    // Exit CSS immersive mode
+    if (cssFullscreen) {
+      setCssFullscreen(false);
+      return;
+    }
+
     const container = containerRef.current;
     if (!container) return;
+
+    // On mobile/iOS the Fullscreen API on a div often does nothing — use CSS mode
+    if (isMobileLike()) {
+      setCssFullscreen(true);
+      setHovering(true);
+      return;
+    }
 
     try {
       const doc = document as Document & {
@@ -52,22 +78,34 @@ export function HeroVideo() {
         webkitRequestFullscreen?: () => Promise<void> | void;
       };
 
-      const isFullscreen = Boolean(
+      const nativeActive = Boolean(
         document.fullscreenElement || doc.webkitFullscreenElement,
       );
 
-      if (isFullscreen) {
+      if (nativeActive) {
         if (document.exitFullscreen) await document.exitFullscreen();
         else doc.webkitExitFullscreen?.();
-      } else if (container.requestFullscreen) {
-        await container.requestFullscreen();
-      } else {
-        el.webkitRequestFullscreen?.();
+        return;
       }
+
+      if (container.requestFullscreen) {
+        await container.requestFullscreen();
+        return;
+      }
+
+      if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+        return;
+      }
+
+      // Last resort
+      setCssFullscreen(true);
+      setHovering(true);
     } catch {
-      // Fullscreen may be blocked by the browser
+      setCssFullscreen(true);
+      setHovering(true);
     }
-  }, []);
+  }, [cssFullscreen, isMobileLike]);
 
   const seek = useCallback((value: number) => {
     const video = videoRef.current;
@@ -99,6 +137,23 @@ export function HeroVideo() {
   }, []);
 
   useEffect(() => {
+    if (!cssFullscreen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setCssFullscreen(false);
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [cssFullscreen]);
+
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -119,27 +174,27 @@ export function HeroVideo() {
     };
   }, []);
 
-  const showScrubber = started && (hovering || !playing);
+  const showScrubber = started && (hovering || !playing || expanded);
   const percent = duration > 0 ? (progress / duration) * 100 : 0;
 
   return (
     <div
       ref={containerRef}
       className={`group relative w-full overflow-hidden rounded-2xl ${
-        isFullscreen
-          ? "flex h-screen w-screen items-center justify-center rounded-none bg-green-dark p-6 sm:p-10 md:p-14"
+        expanded
+          ? `${cssFullscreen ? "fixed inset-0 z-[100]" : "flex h-screen w-screen"} flex items-center justify-center rounded-none bg-green-dark p-6 sm:p-10 md:p-14`
           : "aspect-[4/3] bg-pink/50"
       }`}
       onContextMenu={(event) => event.preventDefault()}
       onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+      onMouseLeave={() => {
+        if (!cssFullscreen) setHovering(false);
+      }}
     >
       <video
         ref={videoRef}
         className={`h-full w-full ${
-          isFullscreen
-            ? "max-h-full max-w-full object-contain"
-            : "object-cover"
+          expanded ? "max-h-full max-w-full object-contain" : "object-cover"
         }`}
         src="/images/hero.mp4"
         poster="/images/hero-poster.jpg"
@@ -189,34 +244,36 @@ export function HeroVideo() {
         />
       )}
 
-      {started && playing && (
+      {started && (playing || expanded) && (
         <div className="absolute bottom-14 right-3 z-40 flex gap-2 sm:bottom-16 sm:right-4">
-          <button
-            type="button"
-            onClick={(event) => {
-              event.stopPropagation();
-              togglePlay();
-            }}
-            aria-label="Metti in pausa"
-            className={`flex h-10 w-10 items-center justify-center rounded-full shadow-md backdrop-blur-sm transition sm:h-11 sm:w-11 ${
-              hovering
-                ? "bg-green-light text-green-dark"
-                : "bg-green-dark text-white"
-            } hover:bg-green-light hover:text-green-dark`}
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-              <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" />
-            </svg>
-          </button>
+          {playing && (
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                togglePlay();
+              }}
+              aria-label="Metti in pausa"
+              className={`flex h-10 w-10 items-center justify-center rounded-full shadow-md backdrop-blur-sm transition sm:h-11 sm:w-11 ${
+                hovering || expanded
+                  ? "bg-green-light text-green-dark"
+                  : "bg-green-dark text-white"
+              } hover:bg-green-light hover:text-green-dark`}
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
+                <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" />
+              </svg>
+            </button>
+          )}
           <button
             type="button"
             onClick={(event) => {
               event.stopPropagation();
               void toggleFullscreen();
             }}
-            aria-label="Ingrandisci"
+            aria-label={expanded ? "Riduci" : "Ingrandisci"}
             className={`flex h-10 w-10 items-center justify-center rounded-full shadow-md backdrop-blur-sm transition sm:h-11 sm:w-11 ${
-              hovering
+              hovering || expanded
                 ? "bg-green-light text-green-dark"
                 : "bg-green-dark text-white"
             } hover:bg-green-light hover:text-green-dark`}
@@ -229,11 +286,19 @@ export function HeroVideo() {
               strokeWidth="2"
               aria-hidden
             >
-              <path
-                d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              {expanded ? (
+                <path
+                  d="M9 3v6H3M15 3v6h6M9 21v-6H3M15 21v-6h6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              ) : (
+                <path
+                  d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              )}
             </svg>
           </button>
         </div>
