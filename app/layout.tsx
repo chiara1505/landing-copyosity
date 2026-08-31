@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Nunito_Sans } from "next/font/google";
+import { jsonLd } from "@/lib/jsonLd";
 import "./globals.css";
 
 const varelaRound = localFont({
@@ -18,15 +19,39 @@ const nunitoSans = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Da 0 a Digital | Copyosity",
+  metadataBase: new URL("https://sito-professionale.copyosity.it"),
+  alternates: {
+    canonical: "/",
+  },
+  title: "Sito professionale in 12 settimane | Copyosity",
   description:
-    "Percorso di 12 settimane per costruire la tua presenza digitale partendo dalle parole: strategia, testi SEO e sito professionale.",
+    "Strategia, testi SEO e sito web in 12 settimane, senza improvvisare. Per libere professioni e piccole attività. Basta rimandare! Raccontami il tuo progetto.",
+  icons: {
+    icon: [{ url: "/images/favicon.png", type: "image/png" }],
+    apple: [{ url: "/images/favicon.png", type: "image/png" }],
+  },
   openGraph: {
-    title: "Da 0 a Digital | Copyosity",
+    title: "Il tuo sito professionale in 12 settimane",
     description:
-      "Porta online un sito che racconti chi sei, faccia capire il valore del tuo lavoro e ti aiuti a raggiungere le persone giuste.",
+      "Strategia, testi e sito web con Copyosity. Un percorso chiaro per libere professioni e piccole realtà che vogliono finalmente andare online.",
     locale: "it_IT",
     type: "website",
+    siteName: "Copyosity",
+    images: [
+      {
+        url: "/images/og.jpg",
+        width: 1024,
+        height: 537,
+        alt: "Vai online con il tuo sito professionale in 12 settimane — Copyosity",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Il tuo sito professionale in 12 settimane",
+    description:
+      "Strategia, testi e sito web con Copyosity. Un percorso chiaro per libere professioni e piccole realtà che vogliono finalmente andare online.",
+    images: ["/images/og.jpg"],
   },
 };
 
@@ -61,6 +86,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

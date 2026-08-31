@@ -158,7 +158,7 @@ export function HeroVideo() {
           setStarted(true);
         }}
         onEnded={() => setPlaying(false)}
-        aria-label="Video di presentazione del percorso Da 0 a Digital"
+        aria-label="Video di presentazione del percorso Strategia + Sito"
       >
         Il tuo browser non supporta la riproduzione video.
       </video>

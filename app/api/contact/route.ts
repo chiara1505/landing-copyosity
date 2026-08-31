@@ -104,9 +104,9 @@ export async function POST(request: Request) {
       from: fromEmail,
       to: [toEmail],
       replyTo: email,
-      subject: `Candidatura Da 0 a Digital — ${name}`,
+      subject: `Candidatura Strategia + Sito — ${name}`,
       text: [
-        "Nuova candidatura Da 0 a Digital",
+        "Nuova candidatura Strategia + Sito",
         "",
         `Nome: ${name}`,
         `Email: ${email}`,

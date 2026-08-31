@@ -1,6 +1,6 @@
-# Landing page Da 0 a Digital — Copyosity
+# Landing page Strategia + Sito — Copyosity
 
-Next.js landing for the **Da 0 a Digital** service. Goal: collect application form submissions.
+Next.js landing for the **Strategia + Sito** service. Goal: collect application form submissions.
 
 ## Local development
 
