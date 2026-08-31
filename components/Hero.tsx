@@ -1,4 +1,5 @@
 import { TypewriterTitle } from "./TypewriterTitle";
+import { HeroVideo } from "./HeroVideo";
 
 export function Hero() {
   return (
@@ -56,24 +57,7 @@ export function Hero() {
           className="mt-4 animate-fade-up sm:mt-0"
           style={{ animationDelay: "180ms" }}
         >
-          {/* Placeholder: sostituisci con foto o video esplicativo */}
-          <div className="relative h-52 w-full overflow-hidden rounded-2xl bg-pink/50 sm:h-72 lg:h-[min(34rem,calc(100svh-11rem))]">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
-              <span
-                aria-hidden
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-white/80 text-2xl text-green-dark"
-              >
-                ▶
-              </span>
-              <p className="font-display text-lg text-green-dark">
-                Spazio per foto o video
-              </p>
-              <p className="max-w-xs text-sm text-ink-muted">
-                Qui potrai inserire un’immagine o un video che spiega il
-                percorso.
-              </p>
-            </div>
-          </div>
+          <HeroVideo />
         </div>
       </div>
     </section>

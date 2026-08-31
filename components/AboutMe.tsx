@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { TypewriterTitle } from "./TypewriterTitle";
 
@@ -15,16 +18,19 @@ export function AboutMe() {
 
         <div className="mt-10 grid items-center gap-8 sm:mt-14 lg:grid-cols-2 lg:gap-12">
           <Reveal className="w-full">
-            {/* Placeholder: sostituisci con la tua foto */}
-            <div className="relative mx-auto aspect-[5/4] w-full max-w-md overflow-hidden rounded-2xl bg-green-light/45 lg:max-w-lg">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
-                <p className="font-display text-lg text-green-dark">
-                  Spazio per la tua foto
-                </p>
-                <p className="max-w-xs text-sm text-ink-muted">
-                  Qui potrai inserire un ritratto o una foto di te al lavoro.
-                </p>
-              </div>
+            <div
+              className="relative mx-auto aspect-[4/5] w-full max-w-[14rem] select-none overflow-hidden rounded-2xl bg-green-light/45 sm:max-w-[16rem] lg:max-w-[18rem]"
+              onContextMenu={(event) => event.preventDefault()}
+            >
+              <Image
+                src="/images/chiara.jpg"
+                alt="Chiara di Copyosity"
+                fill
+                draggable={false}
+                className="pointer-events-none object-cover object-top"
+                sizes="(max-width: 640px) 14rem, 18rem"
+                priority={false}
+              />
             </div>
           </Reveal>
 
