@@ -4,7 +4,13 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 bg-green-light">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3 sm:gap-4 sm:px-8 sm:py-4">
-        <a href="#top" className="inline-flex min-w-0 shrink items-center" aria-label="Copyosity">
+        <a
+          href="https://www.copyosity.it/"
+          className="inline-flex min-w-0 shrink items-center"
+          aria-label="Vai al sito Copyosity"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src="/images/logo.png"
             alt="Copyosity — Tante buone parole"
