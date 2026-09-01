@@ -33,8 +33,9 @@ export function Hero() {
             className="mt-6 animate-fade-up text-lg leading-relaxed text-ink-muted"
             style={{ animationDelay: "200ms" }}
           >
-            Porta online un sito che racconti chi sei, renda chiaro il valore di
-            ciò che fai e ti faccia scegliere dalle persone giuste.
+            Porta online un sito che vada oltre i social: il tuo punto
+            ufficiale, che racconta chi sei e ti fa scegliere dalle persone
+            giuste.
           </p>
           <p
             className="mt-5 animate-fade-up text-lg leading-relaxed text-ink-muted"

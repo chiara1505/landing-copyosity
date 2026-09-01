@@ -113,11 +113,11 @@ export const outcomes: Outcome[] = [
 
 export const forYouIf = [
   "Hai rimandato il sito per mesi perché non sapevi da dove partire o avevi paura di buttare soldi",
+  "Usi già i social, ma ti manca un sito chiaro dove le persone possano capirti e decidere se contattarti",
   "Hai già un sito o una presenza online, ma non ti rappresenta",
   "Vuoi un sito professionale, senza scegliere template a caso e scrivere testi da sola/o",
   "Sai cosa fai bene, ma fatichi a spiegarlo online in modo chiaro e convincente",
   "Vuoi sfruttare ogni opportunità del web per farti trovare dalle persone giuste",
-  "Vuoi avere una sola professionista di riferimento per strategia, testi e realizzazione del sito",
 ] as const;
 
 export const phases = [
