@@ -112,7 +112,7 @@ export const outcomes: Outcome[] = [
 ];
 
 export const forYouIf = [
-  "Hai rimandato il sito per mesi perché non sapevi da dove partire o avevi paura di buttare soldi",
+  "Hai rimandato il sito per mesi perché non sapevi da dove partire o avevi paura di investire male i tuoi soldi",
   "Usi già i social, ma ti manca un sito chiaro dove le persone possano capirti e decidere se contattarti",
   "Hai già un sito o una presenza online, ma non ti rappresenta",
   "Vuoi un sito professionale, senza scegliere template a caso e scrivere testi da sola/o",
